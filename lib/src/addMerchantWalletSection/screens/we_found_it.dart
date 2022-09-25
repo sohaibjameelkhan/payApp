@@ -27,7 +27,8 @@ class WeFoundItScreen extends StatelessWidget {
                 radius: 27,
                 text: TextUtils.continuebutton,
                 onTap: () {
-                  toNext(context: context, widget: const walletAddedSucessfully());
+                  toNext(
+                      context: context, widget: const walletAddedSucessfully());
                 }),
             const SizedBox(
               height: 30,
@@ -44,8 +45,13 @@ class WeFoundItScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SvgPicture.asset(
-                    Res.arrowback,
+                  InkWell(
+                    onTap: () {
+                      Navigator.maybePop(context);
+                    },
+                    child: SvgPicture.asset(
+                      Res.arrowback,
+                    ),
                   ),
                   Text(
                     TextUtils.walletAddress,
@@ -167,7 +173,7 @@ class WeFoundItScreen extends StatelessWidget {
               const TextFieldWidget(
                   textFieldHeight: 50,
                   maxlines: 1,
-                  hintText: "Merchant Name",
+                  hintText: "Enter your merchant name",
                   textInputType: TextInputType.text),
             ],
           ),

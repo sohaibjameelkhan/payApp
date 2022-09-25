@@ -250,7 +250,7 @@ class TransactionDetails extends StatelessWidget {
                           color: AppColors.darktextcolor,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Align(
@@ -266,7 +266,7 @@ class TransactionDetails extends StatelessWidget {
                                   color:
                                       AppColors.darktextcolor.withOpacity(0.5)),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             Text(

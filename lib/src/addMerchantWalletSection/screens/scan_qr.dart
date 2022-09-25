@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:pay_app/src/helperFucntions/navigator_helper.dart';
@@ -17,7 +18,7 @@ class ScanQRScreen extends StatefulWidget {
 }
 
 class _ScanQRScreenState extends State<ScanQRScreen> {
-  final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+  final qrKey = GlobalKey(debugLabel: 'QR');
   Barcode? result;
   QRViewController? controller;
   String qrCode = 'Unknown';
@@ -26,6 +27,27 @@ class _ScanQRScreenState extends State<ScanQRScreen> {
   void dispose() {
     controller?.dispose();
     super.dispose();
+  }
+
+  @override
+  Future<void> reassemble() async {
+    super.reassemble();
+    if (Platform.isAndroid) {
+      await controller!.pauseCamera();
+    }
+    controller!.resumeCamera();
+  }
+
+  @override
+  void initState() {
+    Future.delayed(Duration(seconds: 1), () {
+      reassemble();
+    });
+    super.initState();
+
+    // _onQRViewCreated(controller!);
+    //  buildQrView(context);
+    //_onQRViewCreated(controller!);
   }
   // Barcode? result;
   //QRViewController? controller;
@@ -46,7 +68,7 @@ class _ScanQRScreenState extends State<ScanQRScreen> {
                   toNext(context: context, widget: const AnotherMethodScreen());
                 }),
             const SizedBox(
-              height: 30,
+              height: 20,
             )
           ],
         ),
@@ -59,8 +81,13 @@ class _ScanQRScreenState extends State<ScanQRScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SvgPicture.asset(
-                  Res.arrowback,
+                InkWell(
+                  onTap: () {
+                    Navigator.maybePop(context);
+                  },
+                  child: SvgPicture.asset(
+                    Res.arrowback,
+                  ),
                 ),
                 Text(
                   TextUtils.scanWalletQr,
@@ -73,7 +100,7 @@ class _ScanQRScreenState extends State<ScanQRScreen> {
               ],
             ),
             const SizedBox(
-              height: 30,
+              height: 15,
             ),
             Text(
               TextUtils.scantheQrcodeofyour,
@@ -90,33 +117,41 @@ class _ScanQRScreenState extends State<ScanQRScreen> {
                   color: AppColors.darktextcolor),
             ),
             const SizedBox(
-              height: 30,
+              height: 20,
             ),
-            SizedBox(
-              height: 400,
-
-              // decoration: BoxDecoration(
-              //     image: DecorationImage(
-              //         image: AssetImage(Res.qrscannerimage))),
-              child: QRView(
-                cameraFacing: CameraFacing.back,
-                key: qrKey,
-                onQRViewCreated: _onQRViewCreated,
-              ),
-            ),
+            SizedBox(height: 470, child: buildQrView(context))
           ],
         ),
       ),
     );
   }
 
+  Widget buildQrView(BuildContext context) => QRView(
+        key: qrKey,
+        onQRViewCreated: _onQRViewCreated,
+        overlay: QrScannerOverlayShape(
+            cutOutSize: MediaQuery.of(context).size.width * 0.8,
+            borderWidth: 10,
+            borderColor: AppColors.whitecolor,
+            borderLength: 20,
+            borderRadius: 1),
+        cameraFacing: CameraFacing.back,
+      );
+
   void _onQRViewCreated(QRViewController controller) {
-    this.controller = controller;
-    controller.scannedDataStream.listen((scanData) {
-      setState(() {
-        result = scanData;
-      });
+    setState(() {
+      this.controller = controller;
     });
+
+    // controller.scannedDataStream.listen((barcode) {
+    //   barcode = result!;
+    //  });
+    // this.controller = controller;
+    // controller.scannedDataStream.listen((scanData) {
+    //   setState(() {
+    //     result = scanData;
+    //   });
+    // });
   }
 
   // Future<void> scanQRCode() async {

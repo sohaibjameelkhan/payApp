@@ -71,15 +71,15 @@ class _TypeOfWalletScreenState extends State<TypeOfWalletScreen> {
                 //  buttonwidth: 100,
                 horizontalPadding: 12,
                 radius: 27,
-                textcolor: merchanntWallet
-                    ? AppColors.darktextcolor
-                    : AppColors.whitecolor,
-                bordercolor: merchanntWallet
-                    ? AppColors.whiteskincolor
-                    : AppColors.appcolor,
-                backgroundcolor: merchanntWallet
-                    ? AppColors.whiteskincolor
-                    : AppColors.appcolor,
+                textcolor: personalWallet == true
+                    ? AppColors.whitecolor
+                    : AppColors.darktextcolor,
+                bordercolor: personalWallet == true
+                    ? AppColors.appcolor
+                    : AppColors.whiteskincolor,
+                backgroundcolor: personalWallet == true
+                    ? AppColors.appcolor
+                    : AppColors.whiteskincolor,
                 text: "Personal Wallet",
                 onTap: () {
                   setState(() {
@@ -114,10 +114,24 @@ class _TypeOfWalletScreenState extends State<TypeOfWalletScreen> {
             CommonButtonWidget(
                 //  buttonwidth: 100,
                 horizontalPadding: 30,
+                textcolor: merchanntWallet == true
+                    ? AppColors.whitecolor
+                    : AppColors.blackcolor,
+                bordercolor: merchanntWallet == true
+                    ? AppColors.appcolor
+                    : AppColors.whiteskincolor,
+                backgroundcolor: merchanntWallet == true
+                    ? AppColors.appcolor
+                    : AppColors.whiteskincolor,
                 radius: 27,
                 text: "Next",
                 onTap: () {
-                  toNext(context: context, widget: const ScanQRScreen());
+                  if (merchanntWallet == true) {
+                    toNext(context: context, widget: const ScanQRScreen());
+                    return;
+                  } else {
+                    return;
+                  }
                 }),
             const SizedBox(
               height: 30,

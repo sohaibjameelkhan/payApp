@@ -128,7 +128,7 @@ class _AnotherMethodScreenState extends State<AnotherMethodScreen> {
                   textFieldHeight: 50,
                   maxlines: 1,
                   onChanged: (val) {
-                    if (val.length > 3) {
+                    if (val.isNotEmpty) {
                       setState(() {
                         btnEnabled = true;
                       });

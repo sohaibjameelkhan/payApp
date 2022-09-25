@@ -84,25 +84,23 @@ class QrCodeScreen extends StatelessWidget {
                               const SizedBox(
                                 height: 8,
                               ),
-                              Container(
-                                child: Card(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(13)),
-                                  elevation: 8,
-                                  color: AppColors.whitecolor,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: QrImage(
-                                      data:
-                                          'This QR code has an embedded image as well',
-                                      version: QrVersions.auto,
-                                      size: 160,
-                                      gapless: false,
-                                      embeddedImage:
-                                          const AssetImage(Res.qrembedimage),
-                                      embeddedImageStyle: QrEmbeddedImageStyle(
-                                        size: const Size(50, 50),
-                                      ),
+                              Card(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(13)),
+                                elevation: 8,
+                                color: AppColors.whitecolor,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: QrImage(
+                                    data:
+                                        'This QR code has an embedded image as well',
+                                    version: QrVersions.auto,
+                                    size: 160,
+                                    gapless: false,
+                                    embeddedImage:
+                                        const AssetImage(Res.qrembedimage),
+                                    embeddedImageStyle: QrEmbeddedImageStyle(
+                                      size: const Size(50, 50),
                                     ),
                                   ),
                                 ),

@@ -75,7 +75,7 @@ class QrPaymentRecieved extends StatelessWidget {
                                 child: Text(
                                   "\$3,345,90.0",
                                   style: fontW4S12(context)!.copyWith(
-                                      fontSize: 21,
+                                      fontSize: 25,
                                       fontWeight: FontWeight.bold,
                                       color: AppColors.blackcolor),
                                 ),

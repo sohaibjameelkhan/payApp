@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import '../../../res.dart';
 import '../../commonWidgets/button_widget.dart';
 import '../../dashboardSection/screens/dashboarsScreen.dart';
@@ -41,8 +40,8 @@ class walletAddedSucessfully extends StatelessWidget {
                 alignment: Alignment.center,
                 child: SvgPicture.asset(
                   Res.walletadded,
-                  height: 120,
-                  width: 120,
+                  height: 150,
+                  width: 150,
                 )),
             const SizedBox(
               height: 30,
